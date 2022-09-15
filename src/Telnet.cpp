@@ -32,12 +32,10 @@ size_t TelnetClass::write(const char* data, size_t size) {
 void TelnetClass::onConnect(void* arg, AsyncClient* client) {
 	_clients.push_back(client);
     client->onDisconnect(std::bind(&TelnetClass::onDisconnect, this, std::placeholders::_1, std::placeholders::_2));
-    Serial.printf("[TelnetClass]: %d client(s) connected\r\n", _clients.size());
 }
 
 void TelnetClass::onDisconnect(void* arg, AsyncClient* client) {
     _clients.erase(std::remove(_clients.begin(), _clients.end(), client), _clients.end());
-    Serial.printf("[TelnetClass]: %d client(s) connected\r\n", _clients.size());
 }
 
 TelnetClass Telnet;
