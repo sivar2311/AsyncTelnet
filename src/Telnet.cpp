@@ -16,7 +16,7 @@ void TelnetClass::begin(int port) {
     if (_server) delete _server;
     _server = new AsyncServer(port);
     _server->onClient(std::bind(&TelnetClass::onConnect, this, std::placeholders::_1, std::placeholders::_2), nullptr);
-    _server->setNoDelay(true);
+//    _server->setNoDelay(true);
     _server->begin();
 }
 
