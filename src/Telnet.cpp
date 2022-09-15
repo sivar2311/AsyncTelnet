@@ -6,6 +6,10 @@ TelnetClass::TelnetClass()
 
 TelnetClass::~TelnetClass() {
     if (_server) delete _server;
+    for (size_t i=0; i<_clients.size(); i++) {
+        delete _clients[i];
+    }
+    _clients.clear();
 }
 
 void TelnetClass::begin(int port) {
@@ -31,7 +35,7 @@ size_t TelnetClass::write(const uint8_t* buffer, size_t size) {
 }
 
 void TelnetClass::onConnect(void* arg, AsyncClient* client) {
-	_clients.push_back(client);
+    _clients.push_back(client);
     client->onDisconnect(std::bind(&TelnetClass::onDisconnect, this, std::placeholders::_1, std::placeholders::_2));
 }
 
