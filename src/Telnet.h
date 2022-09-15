@@ -8,9 +8,10 @@ class TelnetClass : public Print {
   public:
     TelnetClass();
     ~TelnetClass();
-    void   begin(int port = 23);
-    size_t write(uint8_t data);
-    size_t write(const char* data, size_t size);
+    void begin(int port = 23);
+
+    virtual size_t write(uint8_t data) override;
+    virtual size_t write(const uint8_t* buffer, size_t size) override;
 
   protected:
     void onConnect(void* arg, AsyncClient* client);
